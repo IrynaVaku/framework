@@ -10,7 +10,7 @@ describe.skip("\nSuccessful create new user sub suite (happy path with valid log
   //BEFORE hook
   before(async () => {
     await userHelper.create("firstName", "lastName", process.env.EMAIL, process.env.PASSWORD);
-    console.log(userHelper.response);
+    //console.log(userHelper.response);
   });
   //Test Cases
   it("Checking that response status code is 201", () => {
@@ -70,6 +70,7 @@ describe("\nSuccessful login user sub suite (happy path with valid login and pas
   });
   it("Checking that response include token", () => {
     expect(userHelper.response.body.payload.token).not.to.be.undefined;
+    console.log(userHelper.response.body.payload.token);
   });
   //
   it("Checking that response.body.payload.token is a string", () => {
@@ -82,23 +83,26 @@ describe("\nSuccessful login user sub suite (happy path with valid login and pas
   it("Checking that response body.payload.user.roles", () => {
     expect(userHelper.response.body.payload.user.roles).not.to.be.undefined;
   });
-  it("Checking that response include user role is new", () => {
-    expect(userHelper.response.body.payload.user.roles[0]).to.be.eq("new");
-  });
+  //it("Checking that response include user role is new", () => {
+   // expect(userHelper.response.body.payload.user.roles[0]).to.eq("new");
+  //});
+  it("Checking that response include user role is verified", () => {
+     expect(userHelper.response.body.payload.user.roles[0]).to.eq("verified");
+   });
   it("Checking that response includs acl key that is not undefined", () => {
     expect(userHelper.response.body.payload.acl).not.to.be.undefined;
   });
   it("Checking that response include acl is user.auth", () => {
-    expect(userHelper.response.body.payload.acl[0]).to.be.eq("user.auth");
+    expect(userHelper.response.body.payload.acl[0]).to.eq("user.auth");
   });
-  it("Checking that response include userID", () => {
+  it("Checking that response include userId", () => {
     expect(userHelper.response.body.payload.userId).not.to.be.undefined;
   });
   //
-  it("Checking that response.body.payload.token is a string", () => {
+  it("Checking that response.body.payload.userId is a string", () => {
     expect(userHelper.response.body.payload.userId).to.be.an("string");
   });
   it("Checking that response include userID has 24 symbols", () => {
-    expect(userHelper.response.body.payload.userId.length).to.be.eq(24);
+    expect(userHelper.response.body.payload.userId.length).to.eq(24);
   });
 });

@@ -10,8 +10,10 @@ const userHelper = new UserHelper();
 //  Before - will be runned before all the tests - MAIN PRECONDITIONS
 before(async () => {
   //Create a new user / login / save a token to variable etc
-   // await authHelper.login(process.env.LOGIN, process.env.PASSWORD);
-   // process.env.TOKEN = authHelper.response.body.token;
+    await userHelper.login(process.env.EMAIL, process.env.PASSWORD);
+    process.env["TOKEN"] = userHelper.response.body.payload.token;
+    //console.log(userHelper.response.body);
+    //console.log(process.env.TOKEN);
 });
 //  After - will be runned after all the tests - MAIN POSTCONDITIONS
 after(async () => {
