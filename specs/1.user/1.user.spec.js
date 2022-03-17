@@ -2,7 +2,7 @@
 //  Import {expect} assertion function from Chai assertion library
 import { expect } from "chai";
 //  Import helper(s)
-import UserHelper from "../helpers/user.helper";
+import UserHelper from "../../helpers/user.helper";
 //  Creating a new instance of helper(s)
 const userHelper = new UserHelper();
 //  Main Test Suite
@@ -12,7 +12,7 @@ describe.skip("\nSuccessful create new user sub suite (happy path with valid log
     await userHelper.create("firstName", "lastName", process.env.EMAIL, process.env.PASSWORD);
     //console.log(userHelper.response);
   });
-  //Test Cases
+  //Test Cases CREATE USER
   it("Checking that response status code is 201", () => {
     expect(userHelper.response.statusCode).to.eq(201);
   });
@@ -45,7 +45,7 @@ describe.skip("\nSuccessful create new user sub suite (happy path with valid log
     expect(userHelper.response.body.silent).not.to.be.undefined;
   });
 });
-//Login
+//Login Test cases LOGIN
 describe("\nSuccessful login user sub suite (happy path with valid login and password)", () => {
   //BEFORE hook
   before(async () => {

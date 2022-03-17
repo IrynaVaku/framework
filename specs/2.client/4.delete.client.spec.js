@@ -5,11 +5,10 @@ import ClientHelper from "../../helpers/client.helper";
 //import setup  from "../../config/setup";
 const clientHelper = new ClientHelper();
 //Main Test Suite
-describe("\nSuccessful get client sub suite", () => {
+describe("\nSuccessful delete client sub suite", () => {
   //BEFORE hook
   before(async () => {
-    await clientHelper.get("name", "phone", "email", "notes");
-    process.env.CLIENTID = clientHelper.response.body.payload._id
+    await clientHelper.delete();
     console.log(process.env.CLIENTID);
     console.log(clientHelper.response.body);
     
@@ -19,7 +18,7 @@ describe("\nSuccessful get client sub suite", () => {
     expect(clientHelper.response.statusCode).to.eq(200);
   })
   it("Checking that response include message", () => {
-    expect(clientHelper.response.body.message).to.eq("Get Client by id ok");
+    expect(clientHelper.response.body.message).to.eq("Client deleted");
   });
   it("Checking that response include message", () => {
     expect(clientHelper.response.body.message).not.to.be.undefined;
@@ -43,24 +42,5 @@ describe("\nSuccessful get client sub suite", () => {
   });
   it("Checking that response include silent", () => {
     expect(clientHelper.response.body.silent).not.to.be.undefined;
-  });
-  it("Checking that response include clientId", () => {
-    expect(clientHelper.response.body.payload).not.to.be.undefined;
-  });
-  it("Checking that response includes name", () => {
-    expect(clientHelper.response.body.payload.name).not.to.be.undefined;
-  });
-  it("Checking that name is a string", () => {
-    expect(clientHelper.response.body.payload.name).be.an("string");
-  });
-  //
-  it("Checking that response.body.payload.clientId is a string", () => {
-    expect(clientHelper.response.body.payload._id).to.be.an("string");
-  });
-  it("Checking that response include clientID has 24 symbols", () => {
-    expect(clientHelper.response.body.payload._id.length).to.eq(24);
-  });
-  it("Checking that ID is the same as clientID", () => {
-    expect(clientHelper.response.body.payload._id).to.eq(process.env.CLIENTID);
   });
 })
