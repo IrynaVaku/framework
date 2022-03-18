@@ -1,14 +1,21 @@
 import { expect } from "chai";
 //  Import helper(s)
 import ServiceHelper from "../../helpers/service.helper";
-
+import VendorHelper from "../../helpers/vendor.helper";
 const serviceHelper = new ServiceHelper();
-const vendor = `${process.env.VENDORID}`
+const vendorHelper = new VendorHelper();
+//let vendor 
+
 //Main Test Suite
 describe("\nSuccessful create new service sub suite", () => {
   //BEFORE hook
   before(async () => {
-    await serviceHelper.create("name", "vendor", "vendorPrice","clientPrice");
+    await vendorHelper.create("name", "description");
+    process.env["VENDORID"] = vendorHelper.response.body.payload;
+    console.log(vendorHelper.response.body,"Vendor_IDtext");
+    let vendorId = vendorHelper.response.body.payload;
+    
+    await serviceHelper.create("name", "vendorId", "vendorPrice","clientPrice");
     console.log(serviceHelper.response.body,"Service_IDtext");
     process.env["SERVICEID"] = serviceHelper.response.body.payload;
     console.log(process.env.serviceID,"text" );

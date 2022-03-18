@@ -3,11 +3,18 @@ import { expect } from "chai";
 import VendorHelper from "../../helpers/vendor.helper";
 
 const vendorHelper = new VendorHelper();
+const name1 = "Jey Lo";
+const name2 = "Ann Lo";
+const description1 = "prereg";
+const description2 = "commit";
 //Main Test Suite
 describe("\nSuccessful edit vendor sub suite", () => {
   //BEFORE hook
   before(async () => {
-    await vendorHelper.edit("name", "description");
+    await vendorHelper.create(name1, description1);
+    process.env.VENDORID = vendorHelper.response.body.payload;
+    await vendorHelper.edit(name2, description2);
+    await vendorHelper.getByID();
      console.log(vendorHelper.response.body);
     console.log(process.env.VENDORID);
 
@@ -17,7 +24,7 @@ describe("\nSuccessful edit vendor sub suite", () => {
     expect(vendorHelper.response.statusCode).to.eq(200);
   })
   it("Checking that response include message", () => {
-    expect(vendorHelper.response.body.message).to.eq("Vendor updated");
+    expect(vendorHelper.response.body.message).to.eq("Get Vendor by id ok");
   });
   it("Checking that response include message", () => {
     expect(vendorHelper.response.body.message).not.to.be.undefined;

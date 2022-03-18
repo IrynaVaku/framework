@@ -3,6 +3,7 @@ import { expect } from "chai";
 import VendorHelper from "../../helpers/vendor.helper";
 
 const vendorHelper = new VendorHelper();
+
 //Main Test Suite
 describe("\nSuccessful create new vendor sub suite", () => {
   //BEFORE hook
