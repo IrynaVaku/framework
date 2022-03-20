@@ -23,11 +23,11 @@ class ServiceHelper {
         this.response = res;
       });
   }
-  async getByID() {
+  async getByID(serviceId) {
     //Create, setup, send request to server, wait for the response (async/await) and save the respponse from server to response property (variable)
     await supertest(process.env.BASE_URL)
       //Setup a request method - POST and an endpoint - /auth
-      .get(`/service/${process.env.SERVICEID}`)
+      .get(`/service/${serviceId}`)
       .set("Authorization", process.env.TOKEN)
       //Setup payload - object with 2 keys - login and password (and their values)
      // .send({ name, description })
