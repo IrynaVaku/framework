@@ -11,14 +11,14 @@ describe("\nSuccessful create new service sub suite", () => {
   //BEFORE hook
   before(async () => {
     await vendorHelper.create("name", "description");
-    process.env["VENDORID"] = vendorHelper.response.body.payload;
+   // process.env["VENDORID"] = vendorHelper.response.body.payload;
     console.log(vendorHelper.response.body,"Vendor_IDtext");
     let vendorId = vendorHelper.response.body.payload;
     
-    await serviceHelper.create("name", "vendorId", "vendorPrice","clientPrice");
+    await serviceHelper.create("name", vendorId, 4050, 3012);
     console.log(serviceHelper.response.body,"Service_IDtext");
-    process.env["SERVICEID"] = serviceHelper.response.body.payload;
-    console.log(process.env.serviceID,"text" );
+    //process.env["SERVICEID"] = serviceHelper.response.body.payload;
+    console.log(process.env.serviceId,"text" );
     //console.log(serviceHelper.response.body);
   });
   //Test Cases
