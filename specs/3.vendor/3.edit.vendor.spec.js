@@ -13,7 +13,9 @@ describe("\nSuccessful edit vendor sub suite", () => {
   before(async () => {
     await vendorHelper.create(name1, description1);
     process.env.VENDORID = vendorHelper.response.body.payload;
+    
     await vendorHelper.edit(name2, description2);
+    
     await vendorHelper.getByID();
      console.log(vendorHelper.response.body);
     console.log(process.env.VENDORID);
@@ -24,7 +26,7 @@ describe("\nSuccessful edit vendor sub suite", () => {
     expect(vendorHelper.response.statusCode).to.eq(200);
   })
   it("Checking that response include message", () => {
-    expect(vendorHelper.response.body.message).to.eq("Get Vendor by id ok");
+    expect(vendorHelper.response.body.message).to.eq("Vendor updated");
   });
   it("Checking that response include message", () => {
     expect(vendorHelper.response.body.message).not.to.be.undefined;

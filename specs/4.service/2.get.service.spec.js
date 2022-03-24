@@ -84,7 +84,7 @@ describe("\nSuccessful get service sub suite", () => {
     expect(serviceHelper.response.body.payload._id).to.eq(serviceId);
   });
 //vendor
- /* it("Checking that response include vendor", () => {
+  it("Checking that response include vendor", () => {
     expect(serviceHelper.response.body.payload.vendor).not.to.be.undefined;
   });
   it("Checking that vendor is a string", () => {
@@ -95,7 +95,7 @@ describe("\nSuccessful get service sub suite", () => {
   });
   it("Checking that vendor is the same as vendorId", () => {
     expect(serviceHelper.response.body.payload.vendor).to.eq(vendorId);
-  });*/
+  });
   //client Price
   it("Checking that response include clientPrice", () => {
     expect(serviceHelper.response.body.payload.clientPrice).not.to.be.undefined;

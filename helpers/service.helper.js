@@ -17,7 +17,7 @@ class ServiceHelper {
       .post('/service')
       .set("Authorization", process.env.TOKEN)
       //Setup payload - object with 2 keys - login and password (and their values)
-      .send({ name, vendorId, clientPrice, vendorPrice })
+      .send({ name, vendor: vendorId, clientPrice, vendorPrice})
       //Save a response from server to esponse property (variable)
       .then((res) => {
         this.response = res;
@@ -36,14 +36,14 @@ class ServiceHelper {
         this.response = res;
       });
   }
-  async edit(name, vendorId, clientPrice, vendorPrice) {
+  async edit( serviceId, vendorId, name, clientPrice, vendorPrice) {
     //Create, setup, send request to server, wait for the response (async/await) and save the respponse from server to response property (variable)
     await supertest(process.env.BASE_URL)
       //Setup a request method - POST and an endpoint - /auth
-      .patch(`/service/${process.env.SERVICEID}`)
+      .patch(`/service/${serviceId}`)
       .set("Authorization", process.env.TOKEN)
       //Setup payload - object with 2 keys - login and password (and their values)
-      .send({ name, clientPrice, vendorPrice})
+      .send({ vendorId, name, clientPrice, vendorPrice})
       //Save a response from server to esponse property (variable)
       .then((res) => {
         this.response = res;
@@ -53,7 +53,7 @@ class ServiceHelper {
     //Create, setup, send request to server, wait for the response (async/await) and save the respponse from server to response property (variable)
     await supertest(process.env.BASE_URL)
       //Setup a request method - POST and an endpoint - /auth
-      .delete(`/service/${process.env.SERVICEID}`)
+      .delete(`/service/${serviceId}`)
       .set("Authorization", process.env.TOKEN)
       .then((res) => {
         this.response = res;
