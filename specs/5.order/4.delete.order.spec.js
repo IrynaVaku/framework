@@ -9,8 +9,8 @@ let vendorId = null;
 let serviceId = null;
 const name = "Jey Lo First name"; 
 
-  const vendorPrice = 1740;
-  const clientPrice = 1520;
+ // const vendorPrice = 1740;
+ // const clientPrice = 1520;
 
 //Main Test Suite
 describe("\nSuccessful delete service sub suite", () => {
@@ -20,11 +20,11 @@ describe("\nSuccessful delete service sub suite", () => {
        console.log(vendorHelper.response.body,"Vendor_IDtext");
       vendorId = vendorHelper.response.body.payload;
 
-      await serviceHelper.create(name, vendorId, clientPrice, vendorPrice);
+      await serviceHelper.create(name, vendorId, 1520, 1740);
       console.log(serviceHelper.response.body,"Service IDtext");
       serviceId = serviceHelper.response.body.payload;
    
-      await serviceHelper.deleteByID(serviceId);
+      await serviceHelper.delete();
      console.log(serviceHelper.response.body, "La-la-la");
     console.log(process.env.SERVICEID);
 

@@ -6,7 +6,7 @@ import UserHelper from "../../helpers/user.helper";
 //  Creating a new instance of helper(s)
 const userHelper = new UserHelper();
 //  Main Test Suite
-describe.skip("\nSuccessful create new user sub suite (happy path with valid login and password)", () => {
+describe("\nSuccessful create new user sub suite (happy path with valid login and password)", () => {
   //BEFORE hook
   before(async () => {
     await userHelper.create("firstName", "lastName", process.env.EMAIL, process.env.PASSWORD);
