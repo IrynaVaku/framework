@@ -32,17 +32,17 @@ describe("\nSuccessful create new order sub suite", () => {
     await vendorHelper.create("name", "description");
     console.log(vendorHelper.response.body,"Vendor_IDtext");
      vendorId = vendorHelper.response.body.payload;
-    console.log(vendorId,"text" );
+    console.log(vendorId,"text1" );
 
     await serviceHelper.create("name", vendorId, 4050, 3012);
     console.log(serviceHelper.response.body,"Service_IDtext");
      serviceId = serviceHelper.response.body.payload;
-    console.log(serviceId,"text" );
+    console.log(serviceId,"text2" );
 
     await orderHelper.create(clientId, serviceId, 5555, 3333, 2222, 1111, "orderNotes");
     console.log(orderHelper.response.body,"Order_IDtext");
     let orderId = orderHelper.response.body.payload;
-    console.log(orderId,"text" );
+    console.log(orderId,"text3" );
   });
   
   //Test Cases
@@ -50,7 +50,7 @@ describe("\nSuccessful create new order sub suite", () => {
     expect(orderHelper.response.statusCode).to.eq(200);
   });
   /*it("Checking that response include message", () => {
-    expect(serviceHelper.response.body.message).to.eq("Service created");
+    expect(orderHelper.response.body.message).to.eq("Order created");
   });
   it("Checking that response include message", () => {
     expect(serviceHelper.response.body.message).not.to.be.undefined;

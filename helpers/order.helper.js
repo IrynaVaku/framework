@@ -4,13 +4,13 @@ import supertest from 'supertest';
 import 'dotenv/config';   
 
 class OrderHelper {
-  constructor() {
-    this.response = null;
-
+  //constructor() {
+    //this.response = null;
+response
     /*let clientId = process.env.CLIENTID
     let vendorId = process.env.VENDORID
     let serviceId = process.env.SERVICEID*/
-  }
+  //}
    //Create a new  method
    async create(clientId, serviceId, clientPrice, clientPaid, vendorPrice, vendorPaid, orderNotes) {
     //Create, setup, send request to server, wait for the response (async/await) and save the respponse from server to response property (variable)

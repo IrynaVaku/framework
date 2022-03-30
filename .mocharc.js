@@ -8,5 +8,5 @@ module.exports = {
     //Setup all the specs that will be ignored
   //ignore: 'specs/example.spec',
     //Setup additionall timeout (2000 by default)
-  //timeout: 10000
+  timeout: 3000
 }
