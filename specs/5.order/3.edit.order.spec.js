@@ -1,164 +1,199 @@
 import { expect } from "chai";
 //  Import helper(s)
-import VendorHelper from "../../helpers/vendor.helper";
+import OrderHelper from "../../helpers/order.helper";
+import ClientHelper from "../../helpers/client.helper";
 import ServiceHelper from "../../helpers/service.helper";
+import VendorHelper from "../../helpers/vendor.helper";
 
 const serviceHelper = new ServiceHelper();
 const vendorHelper = new VendorHelper();
-let vendorId = null;
-let serviceId = null;
+const clientHelper = new ClientHelper();
+const orderHelper = new OrderHelper();
 
-const name1 = "Jey Lo First name"; 
-const name2 = "Ann Lo Name after edit";
-  const clientPrice1 = 4020;
-  const clientPrice2 = 2050;
-  const vendorPrice1 = 1740;
-  const vendorPrice2 = 1520;
-//Main Test Suite
+let clientId = null;
+  let vendorId = null;
+  let serviceId = null;
+  let orderId = null;
+  let clientPrice1 = 4020;
+  let clientPaid1 = 4000;
+  let clientPrice2 = 2050;
+  let clientPaid2 = 2000;
+  let vendorPrice1 = 1740;
+  let vendorPrice2 = 1040;
+  let vendorPaid1 = 1520;
+  let vendorPaid2 = 1000;
+  let orderNotes = "Tra-La-la-la";
+
+  //Main Test Suite
 describe("\nSuccessful edit service sub suite", () => {
+
     //BEFORE hook
     before(async () => {
+      await clientHelper.create("Boris", "phone", "email", "notes");
+      console.log(clientHelper.response.body, "Client IDtext");
+       clientId = clientHelper.response.body.payload;
+      console.log(clientId, "tra-ta-ta");
+  
       await vendorHelper.create("name", "description");
        console.log(vendorHelper.response.body,"Vendor_IDtext");
       vendorId = vendorHelper.response.body.payload;
       
-      await serviceHelper.create(name1, vendorId, clientPrice1, vendorPrice1);
+      await serviceHelper.create("Brigit", vendorId, 5040, 5024);
       console.log(serviceHelper.response.body,"Service IDtext");
       serviceId = serviceHelper.response.body.payload;
 
-      await serviceHelper.edit( serviceId, vendorId, name2, clientPrice2, vendorPrice2);
-      console.log(serviceHelper.response.body);
-      console.log(serviceId, "Edit");
+      await orderHelper.create(clientId, serviceId, clientPrice1, clientPaid1, vendorPrice1, vendorPaid1, orderNotes);
+    console.log(orderHelper.response.body,"Order_IDtext");
+     orderId = orderHelper.response.body.payload;
+    console.log(orderId,"text3" );
+
+      await orderHelper.edit( orderId, clientId, serviceId, clientPrice2, clientPaid2, vendorPrice2, vendorPaid2, orderNotes);
+      console.log(orderHelper.response.body);
+      console.log(orderId, "Edit");
       
-     /* await serviceHelper.getByID(serviceId);
-      console.log(serviceId,"Text service2") ;
-      console.log(serviceHelper.response.body);*/
   });
   //Test Cases
   it("Checking that response status code is 200", () => {
-    expect(serviceHelper.response.statusCode).to.eq(200);
+    expect(orderHelper.response.statusCode).to.eq(200);
   });
   it("Checking that response include message", () => {
-    expect(serviceHelper.response.body.message).to.eq("Service updated");
+    expect(orderHelper.response.body.message).to.eq("Order updated");
   });
   it("Checking that response include message", () => {
-    expect(serviceHelper.response.body.message).not.to.be.undefined;
+    expect(orderHelper.response.body.message).not.to.be.undefined;
   });
   it("Checking that response include success", () => {
-    expect(serviceHelper.response.body.success).to.eq(true);
+    expect(orderHelper.response.body.success).to.eq(true);
   });
   it("Checking that response include success", () => {
-    expect(serviceHelper.response.body.success).not.to.be.undefined;
+    expect(orderHelper.response.body.success).not.to.be.undefined;
   });
   //
   it("Checking that response include fail", () => {
-    expect(serviceHelper.response.body.fail).to.eq(false);
+    expect(orderHelper.response.body.fail).to.eq(false);
   });
   it("Checking that response include fail", () => {
-    expect(serviceHelper.response.body.fail).not.to.be.undefined;
+    expect(orderHelper.response.body.fail).not.to.be.undefined;
   });
   //
   it("Checking that response include silent", () => {
-    expect(serviceHelper.response.body.silent).to.eq(true);
+    expect(orderHelper.response.body.silent).to.eq(true);
   });
   it("Checking that response include silent", () => {
-    expect(serviceHelper.response.body.silent).not.to.be.undefined;
+    expect(orderHelper.response.body.silent).not.to.be.undefined;
   });
     });
-    describe("\nSuccessful edit service sub suite", () => {
+
+    describe("\nSuccessful get new Order after edit sub suite", () => {
       //BEFORE hook
       before(async () => {
-        
-        await serviceHelper.getByID(serviceId);
-      console.log(serviceId,"Text service2") ;
-      console.log(serviceHelper.response.body);
+        await orderHelper.getByID(orderId);
+        console.log(orderId,"Text order") ;
+        console.log(orderHelper.response.body);
   });
   it("Checking that response status code is 200", () => {
-    expect(serviceHelper.response.statusCode).to.eq(200);
+    expect(orderHelper.response.statusCode).to.eq(200);
   });
   it("Checking that response include message", () => {
-    expect(serviceHelper.response.body.message).to.eq("Get Service by id ok");
+    expect(orderHelper.response.body.message).to.eq("Get Order by id ok");
   });
   it("Checking that response include message", () => {
-    expect(serviceHelper.response.body.message).not.to.be.undefined;
+    expect(orderHelper.response.body.message).not.to.be.undefined;
   });
   it("Checking that response include success", () => {
-    expect(serviceHelper.response.body.success).to.eq(true);
+    expect(orderHelper.response.body.success).to.eq(true);
   });
   it("Checking that response include success", () => {
-    expect(serviceHelper.response.body.success).not.to.be.undefined;
+    expect(orderHelper.response.body.success).not.to.be.undefined;
   });
   //
   it("Checking that response include fail", () => {
-    expect(serviceHelper.response.body.fail).to.eq(false);
+    expect(orderHelper.response.body.fail).to.eq(false);
   });
   it("Checking that response include fail", () => {
-    expect(serviceHelper.response.body.fail).not.to.be.undefined;
+    expect(orderHelper.response.body.fail).not.to.be.undefined;
   });
   //silent
   it("Checking that response include silent", () => {
-    expect(serviceHelper.response.body.silent).to.eq(true);
+    expect(orderHelper.response.body.silent).to.eq(true);
   });
   it("Checking that response include silent", () => {
-    expect(serviceHelper.response.body.silent).not.to.be.undefined;
+    expect(orderHelper.response.body.silent).not.to.be.undefined;
   });
-  it("Checking that response include serviceId", () => {
-    expect(serviceHelper.response.body.payload).not.to.be.undefined;
+  it("Checking that response include orderId", () => {
+    expect(orderHelper.response.body.payload).not.to.be.undefined;
   });
-  //name
-  it("Checking that response include name", () => {
-    expect(serviceHelper.response.body.payload.name).not.to.be.undefined;
+  //order Id
+  it("Checking that response include orderID", () => {
+    expect(orderHelper.response.body.payload._id).not.to.be.undefined;
   });
-  it("Checking that name is a string", () => {
-    expect(serviceHelper.response.body.payload.name).to.be.an("string");
+  it("Checking that orderId is a string", () => {
+    expect(orderHelper.response.body.payload._id).to.be.an("string");
   });
-  it("Checking that name2 is the same", () => {
-    expect(serviceHelper.response.body.payload.name).to.eq(name2);
+  it("Checking that response include orderID has 24 symbols", () => {
+    expect(orderHelper.response.body.payload._id.length).to.eq(24);
   });
-  //service Id
-  it("Checking that response include serviceID", () => {
-    expect(serviceHelper.response.body.payload._id).not.to.be.undefined;
+  it("Checking that ID is the same as orderID", () => {
+    expect(orderHelper.response.body.payload._id).to.eq(orderId);
   });
-  it("Checking that serviceId is a string", () => {
-    expect(serviceHelper.response.body.payload._id).to.be.an("string");
-  });
-  it("Checking that response include serviceID has 24 symbols", () => {
-    expect(serviceHelper.response.body.payload._id.length).to.eq(24);
-  });
-  it("Checking that ID is the same as serviceID", () => {
-    expect(serviceHelper.response.body.payload._id).to.eq(serviceId);
-  });
-//vendor
-  it("Checking that response include vendor", () => {
-    expect(serviceHelper.response.body.payload.vendor).not.to.be.undefined;
-  });
-  it("Checking that vendor is a string", () => {
-    expect(serviceHelper.response.body.payload.vendor).to.be.an("string");
-  });
-  it("Checking that response include vendor has 24 symbols", () => {
-    expect(serviceHelper.response.body.payload.vendor.length).to.eq(24);
-  });
-  it("Checking that vendor is the same as vendorId", () => {
-    expect(serviceHelper.response.body.payload.vendor).to.eq(vendorId);
-  });
-  //client Price
+///service
+it("Checking that response include service", () => {
+  expect(orderHelper.response.body.payload.service).not.to.be.undefined;
+});
+it("Checking that service is an object", () => {
+  expect(orderHelper.response.body.payload.service).to.be.an("object");
+});
+it("Checking that service is the same as serviceId", () => {
+  expect(orderHelper.response.body.payload.service._id).to.eq(serviceId);
+});
+//service name
+it("Checking that response include service name", () => {
+  expect(orderHelper.response.body.payload.service.name).not.to.be.undefined;
+});
+it("Checking that name is a string", () => {
+  expect(orderHelper.response.body.payload.service.name).to.be.an("string");
+});
+it("Checking that name is the same", () => {
+  expect(orderHelper.response.body.payload.service.name).to.eq("Brigit");
+});
+//client
+it("Checking that response include client", () => {
+  expect(orderHelper.response.body.payload.client).not.to.be.undefined;
+});
+it("Checking that client is an object", () => {
+  expect(orderHelper.response.body.payload.client).to.be.an("object");
+});
+it("Checking that client is the same as clientId", () => {
+  expect(orderHelper.response.body.payload.client._id).to.eq(clientId);
+});
+//client name
+it("Checking that response include client name", () => {
+  expect(orderHelper.response.body.payload.client.name).not.to.be.undefined;
+});
+it("Checking that name is a string", () => {
+  expect(orderHelper.response.body.payload.client.name).to.be.an("string");
+});
+it("Checking that name is the same", () => {
+  expect(orderHelper.response.body.payload.client.name).to.eq("Boris");
+});
+ //client Price
   it("Checking that response include clientPrice", () => {
-    expect(serviceHelper.response.body.payload.clientPrice).not.to.be.undefined;
+    expect(orderHelper.response.body.payload.clientPrice).not.to.be.undefined;
   });
   it("Checking that clientPrice is a number", () => {
-    expect(serviceHelper.response.body.payload.clientPrice).to.be.an("number");
+    expect(orderHelper.response.body.payload.clientPrice).to.be.an("number");
   });
   it("Checking that response include clientPrice is the same", () => {
-    expect(serviceHelper.response.body.payload.clientPrice).to.eq(clientPrice2);
+    expect(orderHelper.response.body.payload.clientPrice).to.eq(clientPrice2);
   });
   //vendor Price
   it("Checking that response include vendorPrice", () => {
-    expect(serviceHelper.response.body.payload.vendorPrice).not.to.be.undefined;
+    expect(orderHelper.response.body.payload.vendorPrice).not.to.be.undefined;
   });
   it("Checking that vendorPrice is a number", () => {
-    expect(serviceHelper.response.body.payload.vendorPrice).to.be.an("number");
+    expect(orderHelper.response.body.payload.vendorPrice).to.be.an("number");
   });
   it("Checking that response include vendorPrice2 is the same", () => {
-    expect(serviceHelper.response.body.payload.vendorPrice).to.eq(vendorPrice2);
+    expect(orderHelper.response.body.payload.vendorPrice).to.eq(vendorPrice2);
   });
 })

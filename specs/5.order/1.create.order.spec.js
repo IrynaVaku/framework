@@ -49,40 +49,40 @@ describe("\nSuccessful create new order sub suite", () => {
   it("Checking that response status code is 200", () => {
     expect(orderHelper.response.statusCode).to.eq(200);
   });
-  /*it("Checking that response include message", () => {
+  it("Checking that response include message", () => {
     expect(orderHelper.response.body.message).to.eq("Order created");
   });
   it("Checking that response include message", () => {
-    expect(serviceHelper.response.body.message).not.to.be.undefined;
+    expect(orderHelper.response.body.message).not.to.be.undefined;
   });
   it("Checking that response include success", () => {
-    expect(serviceHelper.response.body.success).to.eq(true);
+    expect(orderHelper.response.body.success).to.eq(true);
   });
   it("Checking that response include success", () => {
-    expect(serviceHelper.response.body.success).not.to.be.undefined;
+    expect(orderHelper.response.body.success).not.to.be.undefined;
   });
   //
   it("Checking that response include fail", () => {
-    expect(serviceHelper.response.body.fail).to.eq(false);
+    expect(orderHelper.response.body.fail).to.eq(false);
   });
   it("Checking that response include fail", () => {
-    expect(serviceHelper.response.body.fail).not.to.be.undefined;
+    expect(orderHelper.response.body.fail).not.to.be.undefined;
   });
   //
   it("Checking that response include silent", () => {
-    expect(serviceHelper.response.body.silent).to.eq(true);
+    expect(orderHelper.response.body.silent).to.eq(true);
   });
   it("Checking that response include silent", () => {
-    expect(serviceHelper.response.body.silent).not.to.be.undefined;
+    expect(orderHelper.response.body.silent).not.to.be.undefined;
   });
-  it("Checking that response include serviceId", () => {
-    expect(serviceHelper.response.body.payload).not.to.be.undefined;
+  it("Checking that response include orderId", () => {
+    expect(orderHelper.response.body.payload).not.to.be.undefined;
   });
   //
-  it("Checking that response.body.payload.serviceId is a string", () => {
-    expect(serviceHelper.response.body.payload).to.be.an("string");
+  it("Checking that response.body.payload.orderId is a string", () => {
+    expect(orderHelper.response.body.payload).to.be.an("string");
   });
-  it("Checking that response include serviceID has 24 symbols", () => {
-    expect(serviceHelper.response.body.payload.length).to.eq(24);
-  });*/
+  it("Checking that response include orderID has 24 symbols", () => {
+    expect(orderHelper.response.body.payload.length).to.eq(24);
+  });
 })
